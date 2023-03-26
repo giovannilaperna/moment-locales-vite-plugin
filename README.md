@@ -18,19 +18,13 @@ npm install --save-dev @giovannilaperna/moment-locales-vite-plugin
 #### `vite.config.js`
 ```js
 import { defineConfig } from 'vite'
-
-const outputPluginStats = () => ({
-  name: '@giovannilaperna/moment-locales-vite-plugin',
-  configResolved(config) {
-    const plugins = config.plugins.map((plugin) => plugin.name)
-    console.log(`Your project has ${plugins.length} Vite plugins.`)
-    console.table(plugins)
-  }
-})
+import MomentLocalesPlugin from ' @giovannilaperna/moment-locales-vite-plugin'
 
 export default defineConfig({
   plugins: [
-    outputPluginStats()
+    MomentLocalesPlugin({
+      localesToKeep: ['es', 'it']
+    })
   ]
 })
 ```
