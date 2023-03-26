@@ -15,22 +15,24 @@ npm install --save-dev @giovannilaperna/moment-locales-vite-plugin
 
 ## Usage
 
+#### `vite.config.js`
 ```js
-// webpack.config.js
-const MomentLocalesPlugin = require(' @giovannilaperna/moment-locales-vite-plugin');
+import { defineConfig } from 'vite'
 
-module.exports = {
-    plugins: [
-        // To strip all locales except “en”
-        new MomentLocalesPlugin(),
+const outputPluginStats = () => ({
+  name: '@giovannilaperna/moment-locales-vite-plugin',
+  configResolved(config) {
+    const plugins = config.plugins.map((plugin) => plugin.name)
+    console.log(`Your project has ${plugins.length} Vite plugins.`)
+    console.table(plugins)
+  }
+})
 
-        // Or: To strip all locales except “en”, “es-us” and “ru”
-        // (“en” is built into Moment and can’t be removed)
-        new MomentLocalesPlugin({
-            localesToKeep: ['es-us', 'ru'],
-        }),
-    ],
-};
+export default defineConfig({
+  plugins: [
+    outputPluginStats()
+  ]
+})
 ```
 
 ## Plugin Options
